@@ -1,0 +1,60 @@
+// Bubble sort example
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] a = { 3, 2, 5, 1, 0 };
+        int[] b = { 3, 2, 5, 1, 0 };
+        Console.WriteLine("Original array: \n3 2 5 1 0");
+        BubbleSort(a);
+        Console.WriteLine("Regular bubble-sort result:");
+        foreach (int i in a)
+            Console.Write(i + " ");
+        BubbleSort(b);
+        Console.WriteLine("\nOptimized bubble-sort result:");
+        foreach (int i in b)
+            Console.Write(i + " ");
+
+    }
+
+    static void BubbleSort(int[] arr)
+    {
+        int tmp;
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            for (int j = 0; j < arr.Length - 1 - i; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                { // swap two adjacent elements if they are not in the intended order
+                    tmp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
+        }
+    }
+
+    static void BubbleSortOptimized(int[] arr)
+    {
+        int tmp;
+        bool flag = false;
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            for (int j = 0; j < arr.Length - 1 - i; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                { // swap two adjacent elements if they are not in the intended order
+                    tmp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = tmp;
+                    flag = true;
+                }
+                if (!flag)
+                {
+                    return; // the array is already sorted
+                }
+            }
+        }
+    }
+}

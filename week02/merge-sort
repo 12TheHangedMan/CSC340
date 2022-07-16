@@ -1,0 +1,53 @@
+// Merge sort example
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] a = { 3, 2, 5, 1, 0 };
+        Console.WriteLine("The original array: 3 2 5 1 0");
+        MergeSort(a, 0, a.Length - 1);
+        Console.Write("The sorted array:   ");
+        foreach (int i in a) { Console.Write(i + " "); }
+    }
+
+    // Recursively sort the two halves and merge them into one sorted list
+    static void MergeSort(int[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int mid = (left + right) / 2;
+            MergeSort(arr, left, mid);
+            MergeSort(arr, mid + 1, right);
+            Merge(arr, left, mid, right);
+        }
+    }
+    // The following method merges two sorted portions of array into one sorted portion.
+    // The start index and end index are left & mid for the left portion, and mid+1 & right
+    // for the right portion of the original array.
+    static void Merge(int[] arr, int left, int mid, int right)
+    {
+        // Create a temporary array to store the sorted elements
+        int[] m = new int[right - left + 1];
+        int i = left, j = mid + 1, k = 0;
+        // If both portions of array has elements, pick the smaller one
+        while (i <= mid && j <= right)
+        {
+            if (arr[i] < arr[j])
+                m[k++] = arr[i++];
+            else
+                m[k++] = arr[j++];
+        }
+        // Copy the remainder of the list
+        while (i <= mid)
+            m[k++] = arr[i++];
+        // Copy the remainder of the list
+        while (j <= right)
+            m[k++] = arr[j++];
+        // Copy sorted data from the temporary array back to the original array
+        for (int index = 0; index < m.Length; index++)
+        {
+            arr[left + index] = m[index];
+        }
+    }
+}

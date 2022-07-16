@@ -1,0 +1,42 @@
+// This is an in-place quick sort example
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] a = { 3, 2, 5, 1, 0 };
+        Console.WriteLine("The original array: 3 2 5 1 0");
+        QuickSort(a, 0, a.Length - 1);
+        Console.Write("The sorted array:   ");
+        foreach (int i in a)
+            Console.Write(i + " ");
+    }
+    static void QuickSort(int[] arr, int left, int right)
+    {
+        // return right way if there is only one element, i.e., left == right,
+        // or there is none, i.e., left > right, 
+        if (left < right)
+        {
+            int p = Partition(arr, left, right); // p is the index of pivot
+            QuickSort(arr, left, p - 1);
+            QuickSort(arr, p + 1, right);
+        }
+    }
+    static int Partition(int[] arr, int left, int right)
+    {
+        int pivot = arr[right], tmp; //in this example we always pick the last element as pivot
+        int l = left;
+        int r = right - 1; //subtract one here because last element is pivot
+        while (l < r)
+        {
+            while (arr[l] < pivot && l < r) { l++; }
+            while (arr[r] > pivot && l < r) { r--; }
+            if (l < r) // if the two elements pointed by l and r are out of order, swap them
+            {
+                tmp = arr[l]; arr[l] = arr[r]; arr[r] = tmp;
+            }
+        }
+        tmp = arr[l]; arr[l] = arr[right]; arr[right] = tmp;
+        return l; //l is the index of partition to be returned
+    }
+}

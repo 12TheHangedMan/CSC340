@@ -50,10 +50,10 @@ class Program
                     arr[j] = tmp;
                     flag = true;
                 }
-                if (!flag)
-                {
-                    return; // the array is already sorted
-                }
+            }
+            if (!flag)
+            {
+                return; // the array is already sorted
             }
         }
     }

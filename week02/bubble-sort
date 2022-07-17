@@ -15,7 +15,6 @@ class Program
         Console.WriteLine("\nOptimized bubble-sort result:");
         foreach (int i in b)
             Console.Write(i + " ");
-
     }
 
     static void BubbleSort(int[] arr)

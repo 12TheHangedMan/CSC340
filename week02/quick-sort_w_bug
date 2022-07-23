@@ -26,11 +26,12 @@ class Program
     {
         int pivot = arr[right], tmp; //in this example we always pick the last element as pivot
         int l = left;
-        int r = right - 1; //subtract one here because last element is pivot
+        // the next line should be int r = right; or change line 9 into quicksort(a,0,a.Length), should not do -1 two times.
+        int r = right; //subtract one here because last element is pivot 
         while (l < r)
         {
             while (arr[l] < pivot && l < r) { l++; }
-            while (arr[r] > pivot && l < r) { r--; }
+            while (arr[r] >= pivot && l < r) { r--; }  // here arr[r] >= pivot, in case elements equals to pivot causes endless loop.
             if (l < r) // if the two elements pointed by l and r are out of order, swap them
             {
                 tmp = arr[l]; arr[l] = arr[r]; arr[r] = tmp;
